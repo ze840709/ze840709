@@ -359,37 +359,37 @@
 	}
 ]
 
-    const contractAddress = '0x08A97d60322Ae5136D0CF8B11D1f1778AB56229C';
+	const contractAddress = '0xcb6e652154c088Ad07703B6Ad4b3732F957F71b4';
 
 	if (typeof web3 !== 'undefined') {
-        // Mist/MetaMask의 프로바이더 사용
-        web3 = new Web3(web3.currentProvider);
-    } else {
-        // 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
-        // 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
-        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-    }
-
-
-    async function func1(){
-        const test_con = new web3.eth.Contract(testAbi, contractAddress);
-        const record = await test_con.methods.getToken().call();
-        alert("record = "+ record);
+		// Mist/MetaMask의 프로바이더 사용
+		web3 = new Web3(web3.currentProvider);
+	} else {
+		// 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
+		// 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
+		web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
 	}
 
-    function func2(){
-		
-		var str = "0x450B96713a0862Ae308D1BB14BAc0AdF976Daca9";
-		
-        web3.eth.getBalance(str, function(error, balance){
-            //document.getElementById("Balance").innerText = web3.fromWei(balance, "ether")
-            // document.getElementById("Balance").innerText = balance;
-            alert("balance = "+balance);
-        })
-    }
 
-    function func3(){
-		
+	async function func1(){
+		const test_con = new web3.eth.Contract(testAbi, contractAddress);
+		const record = await test_con.methods.getToken().call();
+		alert("record = "+ record);
+	}
+
+	function func2(){
+
+		var str = "0x583B9e016F9738d06f96D5bc25Ef55118632FA21";
+
+		web3.eth.getBalance(str, function(error, balance){
+		    //document.getElementById("Balance").innerText = web3.fromWei(balance, "ether")
+		    // document.getElementById("Balance").innerText = balance;
+		    alert("balance = "+balance);
+		})
+	}
+
+	function func3(){
+
 		web3.eth.getAccounts(function(error, accounts) {
 			if (error) {
 				console.log(error);
@@ -399,7 +399,7 @@
 			var account = accounts[0];
 
 			// const test_con = new web3.eth.Contract(testAbi, contractAddress);
-        	// const record = test_con.methods.buyTokens().call();
+			// const record = test_con.methods.buyTokens().call();
 
 			//web3.personal.unlockAccount(accounts[0], '1');
 
@@ -419,15 +419,15 @@
 		// 			});
 
 
-  		// 		}).then(function(result) {
-    	// 	return App.markAdopted();
+		// 		}).then(function(result) {
+	// 	return App.markAdopted();
 		// 	}).catch(fdunction(err) {
 		// 		console.log(err.message);
-  		// 	});
+		// 	});
 		// });
 
 		//alert("web3.eth.getAccounts() = "+ web3.eth.accounts[0]);
-  		})
+		})
 	}
 
 	function func4(){
@@ -439,7 +439,7 @@
 			}
 
 			var from_account = accounts[0];
-			
+
 
 			//transaction object 설정
 			var transactionObj = { 
@@ -450,7 +450,7 @@
 
 			web3.eth.sendTransaction(transactionObj);
 
-  		})
+		})
 
 	}
 
