@@ -361,16 +361,16 @@
 
 	const contractAddress = '0xcb6e652154c088Ad07703B6Ad4b3732F957F71b4';
 
-	web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
+// 	web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
 	
-// 	if (typeof web3 !== 'undefined') {
-// 		// Mist/MetaMask의 프로바이더 사용
-// 		web3 = new Web3(web3.currentProvider);
-// 	} else {
-// 		// 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
-// 		// 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
-// 		web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
-// 	}
+	if (typeof web3 !== 'undefined') {
+		// Mist/MetaMask의 프로바이더 사용
+		web3 = new Web3(web3.currentProvider);
+	} else {
+		// 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
+		// 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
+		web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
+	}
 
 
 	async function func1(){
