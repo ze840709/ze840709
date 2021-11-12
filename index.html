@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- <script src="web3.js/dist/web3.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<script type="text/javascript">
+    
+    const testAbi = [
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_spender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_value",
+				"type": "uint256"
+			}
+		],
+		"name": "Approval",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_ownerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "Burn",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_ownerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "Mint",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_value",
+				"type": "uint256"
+			}
+		],
+		"name": "Transfer",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "_burn",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_spender",
+				"type": "address"
+			}
+		],
+		"name": "allowance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "_value",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_value",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "decimals",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_value",
+				"type": "uint256"
+			}
+		],
+		"name": "decreaseAllowance",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_value",
+				"type": "uint256"
+			}
+		],
+		"name": "increaseAllowance",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "name",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "symbol",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "totalSupply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_value",
+				"type": "uint256"
+			}
+		],
+		"name": "transfer",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "_success",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_value",
+				"type": "uint256"
+			}
+		],
+		"name": "transferFrom",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "_success",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
+
+    const contractAddress = '0x08A97d60322Ae5136D0CF8B11D1f1778AB56229C';
+
+	if (typeof web3 !== 'undefined') {
+        // Mist/MetaMask의 프로바이더 사용
+        web3 = new Web3(web3.currentProvider);
+    } else {
+        // 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
+        // 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
+        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    }
+
+
+    async function func1(){
+        const test_con = new web3.eth.Contract(testAbi, contractAddress);
+        const record = await test_con.methods.getToken().call();
+        alert("record = "+ record);
+	}
+
+    function func2(){
+		
+		var str = "0x450B96713a0862Ae308D1BB14BAc0AdF976Daca9";
+		
+        web3.eth.getBalance(str, function(error, balance){
+            //document.getElementById("Balance").innerText = web3.fromWei(balance, "ether")
+            // document.getElementById("Balance").innerText = balance;
+            alert("balance = "+balance);
+        })
+    }
+
+    function func3(){
+		
+		web3.eth.getAccounts(function(error, accounts) {
+			if (error) {
+				console.log(error);
+				alert("error = "+error);
+			}
+
+			var account = accounts[0];
+
+			// const test_con = new web3.eth.Contract(testAbi, contractAddress);
+        	// const record = test_con.methods.buyTokens().call();
+
+			//web3.personal.unlockAccount(accounts[0], '1');
+
+			// alert("account = "+accounts[0]);
+			// alert("account = "+accounts[1]);
+			// alert("account = "+accounts[2]);
+
+			// App.contracts.Adoption.deployed().then(function(instance) {
+				// adoptionInstance = instance;
+
+				// var input = prompt('question','보낼 돈을 적어주세요');
+
+		// 		return adoptionInstance.adopt(petId, {
+		// 			from: account,
+		// 			to: '0x9f57E844f4ce99721635F9EBde0DDdB7bEcf01fc',
+		// 		value : web3.toWei(input,"ether")
+		// 			});
+
+
+  		// 		}).then(function(result) {
+    	// 	return App.markAdopted();
+		// 	}).catch(fdunction(err) {
+		// 		console.log(err.message);
+  		// 	});
+		// });
+
+		//alert("web3.eth.getAccounts() = "+ web3.eth.accounts[0]);
+  		})
+	}
+
+	function func4(){
+
+		web3.eth.getAccounts(function(error, accounts) {
+			if (error) {
+				console.log(error);
+				alert("error = "+error);
+			}
+
+			var from_account = accounts[0];
+			
+
+			//transaction object 설정
+			var transactionObj = { 
+				from: from_account,
+				to:contractAddress,
+				value: document.getElementById("inputEthe").value
+			};
+
+			web3.eth.sendTransaction(transactionObj);
+
+  		})
+
+	}
+
+	function func5(){
+
+		web3.eth.getAccounts(function(error, accounts) {
+
+			if (error) {
+				console.log(error);
+				alert("error = "+error);
+			}
+
+			document.getElementById("userAddress").value = accounts[0];
+
+		})
+
+	}
+
+</script>
+</head>
+
+<body>
+
+    <h1>내 이더 지갑 잔고</h1>
+
+    <button onclick="func1()">func1()</button>
+    <button onclick="func2()">func2()</button>
+    <button onclick="func3()">func3()</button>
+
+    <button onclick="func4()">func4()</button>
+	<input type="text" id="inputEthe" />
+
+	<button onclick="func5()">func5()</button>
+	<input type="text" id="userAddress" />
+
+</body>
+</html>
