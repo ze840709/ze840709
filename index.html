@@ -440,12 +440,11 @@
 
 			var from_account = accounts[0];
 
-
 			//transaction object 설정
 			var transactionObj = { 
-				from: from_account,
+				from:from_account,
 				to:contractAddress,
-				value: document.getElementById("inputEthe").value
+				value:document.getElementById("inputEthe").value
 			};
 
 			web3.eth.sendTransaction(transactionObj);
