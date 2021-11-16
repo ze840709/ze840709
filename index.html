@@ -388,6 +388,9 @@
 		if (!ethereum || !ethereum.isMetaMask) {
 			throw new Error('Please install MetaMask.')
 		}
+		
+		console.log("ethereum.isMetaMask = "+ethereum.isMetaMask);
+		
 	}
 
 
@@ -477,13 +480,13 @@
 
 <body>
 
-    <h1>내 이더 지갑 잔고</h1>
+	<h1>내 이더 지갑 잔고</h1>
 
-    <button onclick="connect()">connect()</button>
-    <button onclick="connectChk()">connectChk()</button>
-    <button onclick="func3()">func3()</button>
+	<button onclick="connect()">connect()</button>
+	<button onclick="connectChk()">connectChk()</button>
+	<button onclick="func3()">func3()</button>
 
-    <button onclick="func4()">func4()</button>
+	<button onclick="func4()">func4()</button>
 	<input type="text" id="inputEthe" />
 
 	<button onclick="func5()">func5()</button>
