@@ -366,75 +366,50 @@
 
 	function connect(){
 
-		console.log('1');
-		
-		// This is equivalent to ethereum.enable()
-		ethereum.send('eth_requestAccounts')
-		.then(handleAccountsChanged)
-		.catch(err => {
-			if (err.code === 4001) { // EIP 1193 userRejectedRequest error
-				console.log('Please connect to MetaMask.')
-			} else {
-				console.error(err)
-			}
-	    	})
+		console.log('connect() = 1');
+
+		if (!ethereum || !ethereum.isMetaMask) {
+
+			ethereum.send('eth_requestAccounts')
+			.then(handleAccountsChanged)
+			.catch(err => {
+				if (err.code === 4001) { // EIP 1193 userRejectedRequest error
+					console.log('Please connect to MetaMask.')
+				} else {
+					console.error(err)
+				}
+			})
+
+		}
 
 	}
 
 
 	function connectChk(){
+
 		console.log('1');
-		
+
 		if (!ethereum || !ethereum.isMetaMask) {
 			throw new Error('Please install MetaMask.')
 		}
-		
+
 		console.log("ethereum.isMetaMask = "+ethereum.isMetaMask);
-		
+
 	}
 
 
 	function func3(){
+		
+		let currentChainId = null;
 
-		web3.eth.getAccounts(function(error, accounts) {
-			if (error) {
-				console.log(error);
-				alert("error = "+error);
-			}
+		ethereum.send('eth_chainId')
+		.then(handleChainChanged)
+		.catch(err => console.error(err)) // This should never happen
 
-			var account = accounts[0];
+		ethereum.on('chainChanged', handleChainChanged);
 
-			// const test_con = new web3.eth.Contract(testAbi, contractAddress);
-			// const record = test_con.methods.buyTokens().call();
-
-			//web3.personal.unlockAccount(accounts[0], '1');
-
-			// alert("account = "+accounts[0]);
-			// alert("account = "+accounts[1]);
-			// alert("account = "+accounts[2]);
-
-			// App.contracts.Adoption.deployed().then(function(instance) {
-				// adoptionInstance = instance;
-
-				// var input = prompt('question','보낼 돈을 적어주세요');
-
-		// 		return adoptionInstance.adopt(petId, {
-		// 			from: account,
-		// 			to: '0x9f57E844f4ce99721635F9EBde0DDdB7bEcf01fc',
-		// 		value : web3.toWei(input,"ether")
-		// 			});
-
-
-		// 		}).then(function(result) {
-	// 	return App.markAdopted();
-		// 	}).catch(fdunction(err) {
-		// 		console.log(err.message);
-		// 	});
-		// });
-
-		//alert("web3.eth.getAccounts() = "+ web3.eth.accounts[0]);
-		})
 	}
+
 
 	function func4(){
 
