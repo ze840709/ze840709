@@ -6,7 +6,8 @@
 <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script> -->
 <script type="text/javascript">
 
-    const testAbi = [
+
+	const testAbi = [
 	{
 		"anonymous": false,
 		"inputs": [
@@ -16,12 +17,14 @@
 				"name": "purchaser",
 				"type": "address"
 			},
+
 			{
 				"indexed": false,
 				"internalType": "uint256",
 				"name": "value",
 				"type": "uint256"
 			},
+
 			{
 				"indexed": false,
 				"internalType": "uint256",
@@ -345,8 +348,10 @@
 	}
 ]
 
-    // ZENSTY Token Address : 0xF5E7F651421fceEF429420187774b7164b1742eb
-    // Crow Address : 0xE401598042634bddD552D57257D1e559fBdc2Ae6
+
+	// ZENSTY Token Address : 0xF5E7F651421fceEF429420187774b7164b1742eb
+	// Crow Address : 0xE401598042634bddD552D57257D1e559fBdc2Ae6
+
 	const contractAddress = '0xE401598042634bddD552D57257D1e559fBdc2Ae6';
 
 	if (typeof web3 !== 'undefined') {
@@ -358,12 +363,9 @@
 		web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
 	}
 
-	//web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
 
+	function connect(){
 
-	function func1(){
-
-		console.log("7");
 		// This is equivalent to ethereum.enable()
 		ethereum.send('eth_requestAccounts')
 		.then(handleAccountsChanged)
@@ -374,32 +376,16 @@
 				console.error(err)
 			}
 	    	})
-// 		Web3 = require("web3");
-// 		const ethEnabled = async () => {
-		
-// 			if (window.ethereum) {
-// 				await window.ethereum.send('eth_requestAccounts');
-// 				window.web3 = new Web3(window.ethereum);
-// 				return true;
-// 			}
-// 	  		return false;
-// 		}
 
-// 		const test_con = new web3.eth.Contract(testAbi, contractAddress);
-// 		const record = await test_con.methods.getToken().call();
-// 		alert("record = "+ record);
 	}
+
 
 	function func2(){
-
-		var str = "0xA1EF88f0ea449C54BbaD974c762ab28D5eFAd3b4";
-
-		web3.eth.getBalance(str, function(error, balance){
-		    //document.getElementById("Balance").innerText = web3.fromWei(balance, "ether")
-		    // document.getElementById("Balance").innerText = balance;
-		    alert("balance = "+balance);
-		})
+		if (!ethereum || !ethereum.isMetaMask) {
+			throw new Error('Please install MetaMask.')
+		}
 	}
+
 
 	function func3(){
 
@@ -489,7 +475,7 @@
 
     <h1>내 이더 지갑 잔고</h1>
 
-    <button onclick="func1()">func1()</button>
+    <button onclick="connect()">connect()</button>
     <button onclick="func2()">func2()</button>
     <button onclick="func3()">func3()</button>
 
