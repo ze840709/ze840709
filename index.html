@@ -360,14 +360,13 @@
 	} else {
 		// 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
 		// 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
-		web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
+		web3 = new Web3(new Web3.providers.HttpProvider("https://bsc-dataseed1.binance.org:443"));
 	}
 
 
 	function connect(){
 
 		console.log('connect() = 1');
-
 
 		ethereum.send('eth_requestAccounts')
 		.then(handleAccountsChanged)
@@ -378,7 +377,6 @@
 				console.error(err)
 			}
 		})
-
 
 	}
 
@@ -397,15 +395,6 @@
 
 
 	function func3(){
-		
-		let currentChainId = null;
-
-		ethereum.send('eth_chainId')
-		.then(handleChainChanged)
-		.catch(err => console.error(err)) // This should never happen
-
-		ethereum.on('chainChanged', handleChainChanged);
-
 	}
 
 
