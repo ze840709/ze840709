@@ -380,7 +380,7 @@
 	}
 
 
-	function func2(){
+	function connectChk(){
 		if (!ethereum || !ethereum.isMetaMask) {
 			throw new Error('Please install MetaMask.')
 		}
@@ -476,7 +476,7 @@
     <h1>내 이더 지갑 잔고</h1>
 
     <button onclick="connect()">connect()</button>
-    <button onclick="func2()">func2()</button>
+    <button onclick="connectChk()">connectChk()</button>
     <button onclick="func3()">func3()</button>
 
     <button onclick="func4()">func4()</button>
