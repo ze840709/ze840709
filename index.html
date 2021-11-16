@@ -354,14 +354,17 @@
 
 	const contractAddress = '0xE401598042634bddD552D57257D1e559fBdc2Ae6';
 
-	if (typeof web3 !== 'undefined') {
-		// Mist/MetaMask의 프로바이더 사용
-		web3 = new Web3(Web3.givenProvider);
-	} else {
-		// 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
-		// 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
-		web3 = new Web3(new Web3.providers.HttpProvider("https://bsc-dataseed1.binance.org:443"));
-	}
+	var Web3 = require('web3');
+	const web3_bsc = new Web3('https://bsc-dataseed1.binance.org:443');
+	
+// 	if (typeof web3 !== 'undefined') {
+// 		// Mist/MetaMask의 프로바이더 사용
+// 		web3 = new Web3(Web3.givenProvider);
+// 	} else {
+// 		// 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
+// 		// 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
+// 		web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
+// 	}
 
 
 	function connect(){
