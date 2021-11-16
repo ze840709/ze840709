@@ -354,9 +354,12 @@
 
 	const contractAddress = '0xE401598042634bddD552D57257D1e559fBdc2Ae6';
 
-	var Web3 = require('web3');
-	const web3_bsc = new Web3('https://bsc-dataseed1.binance.org:443');
 	
+	console.log('start = 0');
+
+	const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
+
+
 // 	if (typeof web3 !== 'undefined') {
 // 		// Mist/MetaMask의 프로바이더 사용
 // 		web3 = new Web3(Web3.givenProvider);
@@ -368,8 +371,6 @@
 
 
 	function connect(){
-
-		console.log('connect() = 2');
 
 		ethereum.send('eth_requestAccounts')
 		.then(handleAccountsChanged)
@@ -385,8 +386,6 @@
 
 
 	function connectChk(){
-
-		console.log('connectChk() = 2');
 
 		if (!ethereum || !ethereum.isMetaMask) {
 			throw new Error('Please install MetaMask.')
