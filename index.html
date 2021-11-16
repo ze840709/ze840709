@@ -1,269 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- <script src="web3.js/dist/web3.min.js"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<script src="web3.js/dist/web3.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
 <script type="text/javascript">
     
     const testAbi = [
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "purchaser",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "TokenPurchase",
+		"type": "event"
+	},
+	{
+		"constant": false,
 		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "_spender",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_value",
-				"type": "uint256"
-			}
-		],
-		"name": "Approval",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "_ownerAddress",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "Burn",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "_ownerAddress",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "Mint",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "_from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_value",
-				"type": "uint256"
-			}
-		],
-		"name": "Transfer",
-		"type": "event"
+		"name": "buyTokens",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
 	},
 	{
 		"constant": false,
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "amount",
+				"name": "_icoEndTime",
 				"type": "uint256"
 			}
 		],
-		"name": "_burn",
+		"name": "setIcoEndTime",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
+				"internalType": "uint8",
+				"name": "_icoState",
+				"type": "uint8"
 			},
 			{
-				"internalType": "address",
-				"name": "_spender",
-				"type": "address"
-			}
-		],
-		"name": "allowance",
-		"outputs": [
+				"internalType": "uint256",
+				"name": "_icoStartTime",
+				"type": "uint256"
+			},
 			{
 				"internalType": "uint256",
-				"name": "_value",
+				"name": "_icoEndTime",
 				"type": "uint256"
 			}
 		],
+		"name": "setIcoInit",
+		"outputs": [],
 		"payable": false,
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"constant": false,
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_spender",
-				"type": "address"
-			},
-			{
 				"internalType": "uint256",
-				"name": "_value",
+				"name": "_icoStartTime",
 				"type": "uint256"
 			}
 		],
-		"name": "approve",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
+		"name": "setIcoStartTime",
+		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "balanceOf",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "decimals",
-		"outputs": [
-			{
 				"internalType": "uint8",
-				"name": "",
+				"name": "_icoState",
 				"type": "uint8"
 			}
 		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_spender",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_value",
-				"type": "uint256"
-			}
-		],
-		"name": "decreaseAllowance",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
+		"name": "setIcoState",
+		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"constant": false,
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_spender",
+				"internalType": "address payable",
+				"name": "_wallet",
 				"type": "address"
 			},
 			{
-				"internalType": "uint256",
-				"name": "_value",
-				"type": "uint256"
-			}
-		],
-		"name": "increaseAllowance",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
+				"internalType": "contract ZstToken",
+				"name": "_token",
+				"type": "address"
 			}
 		],
 		"payable": false,
 		"stateMutability": "nonpayable",
-		"type": "function"
+		"type": "constructor"
 	},
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "name",
+		"name": "getToken",
 		"outputs": [
 			{
-				"internalType": "string",
+				"internalType": "uint256",
 				"name": "",
-				"type": "string"
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -273,12 +150,12 @@
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "symbol",
+		"name": "icoEndTime",
 		"outputs": [
 			{
-				"internalType": "string",
+				"internalType": "uint256",
 				"name": "",
-				"type": "string"
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -288,7 +165,7 @@
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "totalSupply",
+		"name": "icoStartTime",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -301,65 +178,175 @@
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_to",
-				"type": "address"
-			},
+		"constant": true,
+		"inputs": [],
+		"name": "limitTierOne",
+		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "_value",
+				"name": "",
 				"type": "uint256"
 			}
 		],
-		"name": "transfer",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "_success",
-				"type": "bool"
-			}
-		],
 		"payable": false,
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_from",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_to",
-				"type": "address"
-			},
+		"constant": true,
+		"inputs": [],
+		"name": "limitTierThree",
+		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "_value",
+				"name": "",
 				"type": "uint256"
 			}
 		],
-		"name": "transferFrom",
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "limitTierTwo",
 		"outputs": [
 			{
-				"internalType": "bool",
-				"name": "_success",
-				"type": "bool"
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "rateOne",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "rateThree",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "rateTwo",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "testValue",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "token",
+		"outputs": [
+			{
+				"internalType": "contract ZstToken",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "wallet",
+		"outputs": [
+			{
+				"internalType": "address payable",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "weiRaised",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]
 
-	const contractAddress = '0xcb6e652154c088Ad07703B6Ad4b3732F957F71b4';
+    // ZENSTY Token Address : 0xF5E7F651421fceEF429420187774b7164b1742eb
+    // Crow Address : 0xE401598042634bddD552D57257D1e559fBdc2Ae6
+	const contractAddress = '0xE401598042634bddD552D57257D1e559fBdc2Ae6';
 
 // 	web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
 	
@@ -381,7 +368,7 @@
 
 	function func2(){
 
-		var str = "0x583B9e016F9738d06f96D5bc25Ef55118632FA21";
+		var str = "0xA1EF88f0ea449C54BbaD974c762ab28D5eFAd3b4";
 
 		web3.eth.getBalance(str, function(error, balance){
 		    //document.getElementById("Balance").innerText = web3.fromWei(balance, "ether")
