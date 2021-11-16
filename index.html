@@ -356,7 +356,8 @@
 	async function func1(){
 		if (typeof web3 !== 'undefined') {
 		// Mist/MetaMask의 프로바이더 사용
-		web3 = new Web3(web3.currentProvider);
+		web3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546');
+
 		} else {
 			// 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
 			// 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
