@@ -357,20 +357,21 @@
 		web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
 	}
 
-// 	const Web3 = require("web3");
-// 	const ethEnabled = async () => {
-// 		if (window.ethereum) {
-// 	    		await window.ethereum.send('eth_requestAccounts');
-// 	    		window.web3 = new Web3(window.ethereum);
-// 	    		return true;
-// 		}
-// 	  	return false;
-// 	}
+
 
 	async function func1(){
 
-		console.log("1");
+		console.log("2");
+		const Web3 = require("web3");
+		const ethEnabled = async () => {
 		
+			if (window.ethereum) {
+				await window.ethereum.send('eth_requestAccounts');
+				window.web3 = new Web3(window.ethereum);
+				return true;
+			}
+	  		return false;
+		}
 
 // 		const test_con = new web3.eth.Contract(testAbi, contractAddress);
 // 		const record = await test_con.methods.getToken().call();
