@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- <script src="web3.js/dist/web3.min.js"></script> -->
+<script src="web3.js/dist/web3.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
-<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script> -->
 <script type="text/javascript">
 
     const testAbi = [
@@ -362,8 +362,16 @@
 
 	function func1(){
 
-		console.log("4");
-		Web3 = require("web3");
+		console.log("5");
+		if (typeof web3 !== 'undefined') {
+		// Mist/MetaMask의 프로바이더 사용
+		web3 = new Web3(Web3.givenProvider);
+	} else {
+		// 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
+		// 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
+		web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"));
+	}
+// 		Web3 = require("web3");
 // 		const ethEnabled = async () => {
 		
 // 			if (window.ethereum) {
