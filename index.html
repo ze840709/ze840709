@@ -366,6 +366,8 @@
 
 	function connect(){
 
+		console.log('1');
+		
 		// This is equivalent to ethereum.enable()
 		ethereum.send('eth_requestAccounts')
 		.then(handleAccountsChanged)
@@ -381,6 +383,8 @@
 
 
 	function connectChk(){
+		console.log('1');
+		
 		if (!ethereum || !ethereum.isMetaMask) {
 			throw new Error('Please install MetaMask.')
 		}
